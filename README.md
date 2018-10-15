@@ -147,7 +147,7 @@ Add the following line under the `<!-- Script imports -->` comment, around line 
 ```
 This imports the Pusher Channels Javascript library, pusher-js.
 
-Next, add the following code where it says ”Add pusher code here” (around line 17). This creates a new instance of the library and opens a websocket connection to Pusher. You should replace the `xxxxx` values with your app key and cluster, which you can find on the dashboard. 
+Next, add the following code where it says ”Add Pusher connection code here” (around line 15). This creates a new instance of the library and opens a websocket connection to Pusher. You should replace the `xxxxx` values with your app key and cluster, which you can find on the dashboard. 
 ```js
 var pusher = new Pusher('xxxxx', {
     cluster: 'xxxxx',
@@ -155,7 +155,7 @@ var pusher = new Pusher('xxxxx', {
 });
 ```
 
-Next we need to subscribe to the channel. Add the following line directly below the previous code.
+Next we need to subscribe to the channel. Add the following line where it says ”Add Pusher subscribe and bind code here” (around line 20)
 
 ```js
 var channel = pusher.subscribe('chat-app');
@@ -220,7 +220,7 @@ Now fresh all of the browser windows and you should see that whenever a message 
 
 However, you might notice there is a problem. The message gets sent to the sender as well as all the recipients meaning that the message is displayed twice on the sender’s page. To solve this, Channels allows you to exclude a recipient when triggering a message. In order to do this, we need to submit an identifier for the connection to the server, so it knows which client to exclude from recieving the message.
 
-Open client.html and locate the `sendMessage` function (near line 56). Modify the `body` field of the `fetch` section so it goes from looking like this:
+Open client.html and locate the `sendMessage` function (near line 59). Modify the `body` field of the `fetch` section so it goes from looking like this:
 ```js
 body: JSON.stringify({
     messageText
