@@ -42,7 +42,7 @@ and press enter. This changes your current directory to the Desktop.
 Now type: 
 
 ```bash
-git clone git@github.com:pusher/channels-curriculum-task.git
+git clone https://github.com/pusher/channels-curriculum-task.git
 ```
 
 and press enter. This will download the project files to a directory on your desktop, called `channels-curriculum-task`.
