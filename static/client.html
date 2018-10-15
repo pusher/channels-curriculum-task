@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Chat</title>
+
+        <link rel="stylesheet" href="styles.css">
+
+        <!-- Script imports -->
+        <script src="javascript/util.js"></script>
+
+        <script type="text/javascript">
+            // When the page body is ready
+            function afterLoad(){
+
+                // Add Pusher code here
+
+                // Load the existing messages from the server
+                fetch("/getMessages")
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(messages) {
+                        // Loop through the messages that we receive
+                        for (let message of messages) {
+                            // Add the message to the page
+                            addMessageToPage(message.text);
+                        }
+                    });
+    
+                // Add listener to the form to send the message to server if we submit the form
+                document.getElementById("new-message-form").addEventListener("submit",sendMessage);
+    
+                // Add a listener to the text field to submit the form if we press enter
+                document.getElementById("new-message-text").addEventListener("keypress",function(event){
+                    // Key code of the enter key is 13
+                    if(event.keyCode == 13){
+                        event.preventDefault();
+                        sendMessage();
+                    }
+                });
+    
+                // Focus on the textbox when the page first opens
+                document.getElementById("new-message-text").focus();
+
+            };
+    
+            function addMessageToPage(messageText){
+                // Add the HTML to the page
+                document.getElementById("messages").innerHTML += "<div><div class='message'>"+sanitizeHTML(messageText)+"</div></div>";
+                // Scroll to the new bottom of the message list
+                document.getElementById("messages-container").scrollTop = document.getElementById("messages-container").scrollHeight;
+            }
+    
+            function sendMessage(event){
+                if(event){
+                    event.preventDefault();
+                }
+                
+                // Grab the value from the text field and clear it
+                let messageText = document.getElementById("new-message-text").value;
+                document.getElementById("new-message-text").value = "";
+
+                //If the text area isn't blank
+                if(messageText.trim().length > 0){
+                    // Add the new message to the page
+                    addMessageToPage(messageText);
+        
+                    // Send the new message to the server
+                    fetch("/newMessage", {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        method: 'POST',
+                        body: JSON.stringify({
+                            messageText
+                        })
+                    });
+                    
+                }
+            }
+        </script>
+
+    </head>
+    <body>  
+        <div id="box">
+            <div id="messages-container">
+                <div id="messages"></div>
+            </div>
+            <form id="new-message-form">
+                <textarea id="new-message-text" placeholder="Type a message"></textarea>
+                <button type="submit">Send</button> 
+            </form>
+        </div>
+        <script type="text/javascript">
+            // Call the after load function after the body has loaded
+            afterLoad();
+        </script>
+    </body>
+</html>
