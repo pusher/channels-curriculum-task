@@ -147,7 +147,7 @@ Add the following line under the `<!-- Script imports -->` comment, around line 
 ```
 This imports the Pusher Channels Javascript library, pusher-js.
 
-Next, add the following code below the comment says ”Add Pusher connection code here” (around line 15). This creates a new instance of the library and opens a websocket connection to Pusher. You should replace the `xxxxx` values with your app key and cluster, which you can find on the dashboard. 
+Next, add the following code below the comment that says ”Add Pusher connection code here” (around line 15). This creates a new instance of the library and opens a websocket connection to Pusher. You should replace the `xxxxx` values with your app key and cluster, which you can find on the dashboard. 
 ```js
 var pusher = new Pusher('xxxxx', {
     cluster: 'xxxxx',
