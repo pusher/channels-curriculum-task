@@ -217,7 +217,7 @@ Next, we need to add code to the `/newMessage` handler to trigger the `new-messa
 pusher.trigger('chat-app', 'new-message', { message });
 ```
 
-Now fresh all of the browser windows and you should see that whenever a message is sent, all instances of the client receive the message in realtime, without having to refresh the page.
+Now refresh all of the browser windows and you should see that whenever a message is sent, all instances of the client receive the message in realtime, without having to refresh the page.
 
 However, you might notice there is a problem. The message gets sent to the sender as well as all the recipients meaning that the message is displayed twice on the sender’s page. To solve this, Channels allows you to exclude a recipient when triggering a message. In order to do this, we need to submit an identifier for the connection to the server, so it knows which client to exclude from recieving the message.
 
