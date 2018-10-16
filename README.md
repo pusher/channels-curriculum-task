@@ -147,7 +147,7 @@ Add the following line under the `<!-- Script imports -->` comment, around line 
 ```
 This imports the Pusher Channels Javascript library, pusher-js.
 
-Next, add the following code where it says ”Add Pusher connection code here” (around line 15). This creates a new instance of the library and opens a websocket connection to Pusher. You should replace the `xxxxx` values with your app key and cluster, which you can find on the dashboard. 
+Next, add the following code below the comment says ”Add Pusher connection code here” (around line 15). This creates a new instance of the library and opens a websocket connection to Pusher. You should replace the `xxxxx` values with your app key and cluster, which you can find on the dashboard. 
 ```js
 var pusher = new Pusher('xxxxx', {
     cluster: 'xxxxx',
@@ -155,7 +155,7 @@ var pusher = new Pusher('xxxxx', {
 });
 ```
 
-Next we need to subscribe to the channel. Add the following line where it says ”Add Pusher subscribe and bind code here” (around line 20)
+Next we need to subscribe to the channel. Add the following line below the comment that says ”Add Pusher subscribe and bind code here” (around line 20)
 
 ```js
 var channel = pusher.subscribe('chat-app');
@@ -176,7 +176,7 @@ To test the code we just added, we can use the debug console on the Channels das
 
 ![Debug console](tutorial/images/debug-console.png)
 
-Click `Show event creator`. Set the channel field to `chat-app` and the event to `new-message`. Now add the follow body:
+Click `Show event creator`. Set the channel field to `chat-app` and the event to `new-message`. Now add the following body:
 
 ```json
 {
@@ -211,7 +211,8 @@ const pusher = new Pusher({
 });
 ```
 
-Next, we need to add code to the `/newMessage` handler to trigger the `new-message` event on the Pusher channel whenever the server recieves a new message. Paste the following code snippet into the `/newMessage` handler, just below the comment that says `// Add Channels trigger here` (near line 36).
+Next, we need to add code to the `/newMessage` handler to trigger the `new-message` event on the Pusher channel whenever the server recieves a new message. Add the following code snippet to the `/newMessage` handler, just below the comment that says `// Add Channels trigger here` (near line 36).
+
 ```js
 pusher.trigger('chat-app', 'new-message', { message });
 ```
